@@ -11,8 +11,8 @@ else:
 # Задача №2
 total_amount = float(input("Введите сумму покупки (в у.е.): "))
 if total_amount > 20:
-    discount = total_amount * 0.35  # Рассчитываем скидку 35%
-    final_price = total_amount - discount  # Итоговая стоимость после скидки
+    discount = total_amount * 0.35  
+    final_price = total_amount - discount  
 discount = round(discount, 2)
 final_price = round(final_price, 2)
 print(f"Размер предоставленной скидки: {discount} у.е.")
