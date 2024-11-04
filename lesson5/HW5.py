@@ -23,7 +23,7 @@ print(f"Координаты точки с минимальным углом: {m
 
 
 # Задача №2
-def sieve_of_eratosthenes(limit):
+def sito_of_eratosthenes(limit):
     is_prime = [True] * (limit + 1)
     p = 2
     while (p * p <= limit):
@@ -34,7 +34,7 @@ def sieve_of_eratosthenes(limit):
     return [p for p in range(2, limit + 1) if is_prime[p]]
 def find_palindromic_primes(n):
     palindromic_primes = []
-    primes = sieve_of_eratosthenes(n) 
+    primes = sito_of_eratosthenes(n) 
     for prime in primes:
         binary_representation = bin(prime)[2:]  # Получаем двоичную запись без префикса '0b'
         if binary_representation == binary_representation[::-1]:
