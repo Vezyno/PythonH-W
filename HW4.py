@@ -32,6 +32,7 @@ print("Символы внутри скобок:", inside_content)
 # Задача №3
 input_string = "Абстракция, авария, аллея, машина, земля, арка, зебра"
 words = input_string.split()
+print(words)
 result = []
 for word in words:
     if word.lower()[:1] == "а" or word.lower()[-1:] == "я":

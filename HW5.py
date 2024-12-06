@@ -36,7 +36,7 @@ def find_palindromic_primes(n):
     palindromic_primes = []
     primes = sito_of_eratosthenes(n) 
     for prime in primes:
-        binary_representation = bin(prime)[2:]  # Получаем двоичную запись без префикса '0b'
+        binary_representation = bin(prime)[2:] 
         if binary_representation == binary_representation[::-1]:
             palindromic_primes.append(prime)
     return palindromic_primes
