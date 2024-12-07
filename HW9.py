@@ -1,79 +1,57 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-# Определяем функцию
-def f(x, alpha, beta):
-    return (x**beta + alpha**beta) / x**beta
-
-# Задаем диапазон значений x для основного графика
-x_main = np.linspace(-3, -0.1, 400)  # от -3 до -0.1, чтобы избежать деления на ноль
-# Задаем диапазон значений x для врезки
-x_zoom = np.linspace(-0.1, -10, 100)  # от -0.1 до -10 для врезки
-
-# Параметры для графиков
-params = [
-    (1, 0.5),
-    (1, -0.5),
-    (2, 0.5),
-    (2, -1)
-]
-
-# Построение графиков
-plt.figure(figsize=(12, 6))
-
-for alpha, beta in params:
-    # Основной график
-    plt.plot(x_main, f(x_main, alpha, beta), label=f'α={alpha}, β={beta}')
-    
-    # Врезка
-    plt.plot(x_zoom, f(x_zoom, alpha, beta), linestyle='--', color=plt.gca().lines[-1].get_color())
-
-# Добавление прямой f(x) = 0
-plt.axhline(0, color='black', lw=0.5, ls='--', label='f(x) = 0')
-
-# Настройка графика
-plt.title('Графики функции для x < 0')
+# Задача №1-2
+def f(x, a, b):
+    return (x**b + a**b) / (x**b)
+x_pos = np.linspace(0.1, 10, 400)  # для x > 0
+x_neg = np.linspace(-10, -0.1, 400)  # для x < 0
+params = [(1, 1), (2, 1), (1, 2), (1, 0.5), (1, -0.5), (1, -1.5)]
+plt.figure(figsize=(10, 8))
+for a, b in params:
+    y_pos = f(x_pos, a, b)
+    plt.plot(x_pos, y_pos, label=f'a={a}, b={b}')
 plt.xlabel('x')
 plt.ylabel('f(x)')
-plt.axvline(0, color='black', lw=0.5, ls='--')  # Вертикальная линия x=0
+plt.title('Графики функции f(x) для различных значений a и b (x > 0)')
+plt.grid(True)
 plt.legend()
-plt.grid()
-plt.xlim(-10, 0)
-plt.ylim(-10, 10)
+# Вставка для малых x (для x около 0)
+plt.axes([0.1, 0.5, 0.35, 0.35]) 
+for a, b in params:
+    y_pos_zoom = f(np.linspace(0.1, 1, 100), a, b)
+    plt.plot(np.linspace(0.1, 1, 100), y_pos_zoom, label=f'a={a}, b={b}')
+plt.title('Малые x')
+plt.grid(True)
+# Вставка для больших x (для x > 5)
+plt.axes([0.55, 0.5, 0.35, 0.35]) 
+for a, b in params:
+    y_pos_zoom_large = f(np.linspace(5, 10, 100), a, b)
+    plt.plot(np.linspace(5, 10, 100), y_pos_zoom_large, label=f'a={a}, b={b}')
+plt.title('Большие x')
+plt.grid(True)
+plt.savefig('graph_x_pos.svg', format='svg')
 plt.show()
 
-# Задание 4
-def f(x, alpha, beta):
-    return (x**beta + alpha**beta) / x**beta
 
-x = np.linspace(0.1, 3, 400)  
-params = [
-    (1, 0.5),
-    (1, -0.5),
-    (1, -1.5)
-]
-
-common_params = [(1, 0), (1, -1)]
-unique_params = [
-    [(1, 0.5), (1, 0.8)],
-    [(1, -0.5), (1, -0.8)],
-    [(1, -1.5), (1, -2.5)]
-]
-
-plt.figure(figsize=(15, 5))
-
-for i, (alpha_common, beta_common) in enumerate(common_params):
-    plt.subplot(1, 3, i + 1)
-    # Общие графики
-    plt.plot(x, f(x, alpha_common, beta_common), 'b--', label=f'α={alpha_common}, β={beta_common}')
-    # Уникальные графики
-    for alpha_unique, beta_unique in unique_params[i]:
-        plt.plot(x, f(x, alpha_unique, beta_unique), label=f'α={alpha_unique}, β={beta_unique}')
-    plt.title(f'Графики для α={alpha_common}')
-    plt.xlabel('x')
-    plt.ylabel('f(x)')
-    plt.axhline(0, color='black', lw=0.5, ls='--')
-    plt.axvline(0, color='black', lw=0.5, ls='--')
-    plt.legend()
-    plt.grid()
+# Задача №3
+plt.figure(figsize=(10, 8))
+# Строим графики для x < 0
+for a, b in params:
+    y_neg = f(x_neg, a, b)
+    plt.plot(x_neg, y_neg, label=f'a={a}, b={b}')
+# Добавляем прямую f(x) = 0
+plt.axhline(0, color='black', linestyle='--', label='f(x) = 0')
+plt.xlabel('x')
+plt.ylabel('f(x)')
+plt.title('Графики функции f(x) для различных значений a и b (x < 0)')
+plt.grid(True)
+plt.legend()
+plt.axes([0.55, 0.5, 0.35, 0.35]) 
+for a, b in params:
+    y_neg_zoom = f(np.linspace(-10, -5, 100), a, b)
+    plt.plot(np.linspace(-10, -5, 100), y_neg_zoom, label=f'a={a}, b={b}')
+plt.title('x → -inf')
+plt.grid(True)
+plt.savefig('graph_x_neg.svg', format='svg')
 plt.show()
