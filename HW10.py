@@ -21,12 +21,6 @@ print(series_from_numpy)
 print("\nDataFrame из словаря:")
 print(df_from_dict)
 
-
-
-
-
-
-
 # Получаем частоты уникальных элементов для Series
 series_frequency = series_from_list.value_counts()
 
